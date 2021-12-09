@@ -17,7 +17,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        setProperty("archivesBaseName", "Demo  -$versionName")
+        //setProperty("archivesBaseName", "Demo")
     }
 
     buildTypes {
