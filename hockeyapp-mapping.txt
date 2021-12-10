@@ -1,0 +1,2 @@
+#Fri Dec 10 19:12:03 IST 2021
+wrapper={"apk"\:"app-debug.apk","hockeyAppId"\:"Android_FreeStyle","releaseId"\:"210831","isAppCenter"\:"true","appcenterOrg"\:"bhupatiramesh-3mfx"}
