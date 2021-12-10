@@ -29,6 +29,11 @@ fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
+@Composable
+fun DummyGreeting(name: String) {
+    Text(text = "Dummy Hello $name!")
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

@@ -1,8 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.sonarqube'
 }
-
+apply from: '../jacoco.gradle'
+apply from: '../sonarqube.gradle'
 android {
     compileSdk 31
 
@@ -19,9 +21,20 @@ android {
         }
         //setProperty("archivesBaseName", "Demo")
     }
-
+    signingConfigs {
+         release {
+             storeFile  file("keystore.jks")
+             storePassword  'password'
+             keyAlias 'cicd'
+             keyPassword 'password'
+         }
+    }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -58,9 +71,53 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     implementation 'androidx.activity:activity-compose:1.4.0'
+
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 }
+/*
+task teeee {
+
+    def data = readParams()
+    println("Dataaa       finaallllll"+data)
+}
+
+def readParams(){
+    println "inside uploadHockey"
+    File mapping = new File("hockeyapp-mapping.txt")
+    if (!mapping.exists()) {
+        println "mapping doesn't exist"
+        return []
+    }
+    Properties props = new Properties()
+    props.load(mapping.newDataInputStream())
+    for (Map.Entry<Object, Object> e : props.entrySet()) {
+        println("#&#&#&" + props)
+        String projectName = e.getKey() as String
+        println("&&&&&####" + projectName)
+        if (!projectName.isEmpty()) {
+            String value = e.getValue()
+            println("@#&@#&" + value)
+            if (!value.isEmpty()) {
+                def projectObj = new groovy.json.JsonSlurper().parseText(value)
+                println("@#!@#" + projectObj)
+                String hockeyAppId = projectObj["hockeyAppId"]
+                String apkName = projectObj["apk"]
+                String releaseId = projectObj["releaseId"]
+                String appcenterOrg = projectObj["appcenterOrg"]
+                String isAppCenter = projectObj["isAppCenter"]
+
+                println "HockeyApp ID = $hockeyAppId" + "apkName = $apkName" + "releaseID = $releaseId" + "appcenterOrg = $appcenterOrg" + "isAppCenter = $isAppCenter"
+
+                return  projectObj
+
+
+            }
+        }
+    }
+}*/
