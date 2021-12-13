@@ -1,2 +1,7 @@
-#Fri Dec 10 19:12:03 IST 2021
-wrapper={"apk"\:"app-debug.apk","hockeyAppId"\:"Android_FreeStyle","releaseId"\:"210831","isAppCenter"\:"true","appcenterOrg"\:"bhupatiramesh-3mfx"}
+#Fri Nov 26 17:22:57 IST 2021
+cas-wrapper-partycasino-nj={"apk"\:"PartyCasino_NJ.apk","hockeyAppId"\:"Android-CCB-Casino-Unified-PartyCasino-NJ-MediaItsFogo","releaseId"\:"210825","isAppCenter"\:"true","appcenterOrg"\:"GVCCasinoAndroidApps"}
+wrapper-borgata-nj={"apk"\:"wrapper-borgata-nj-beta-debug.apk","hockeyAppId"\:"Android-Unified-Borgata-US-App-Beta","releaseId"\:"210824","isAppCenter"\:"true","appcenterOrg"\:"GVCSportsAndroidApps"}
+wrapper-playmgm-nj={"apk"\:"wrapper-playmgm-nj-beta-debug.apk","hockeyAppId"\:"Android-CCB-Sports-Betmgm-Unified-USApp-Beta","releaseId"\:"211124","isAppCenter"\:"true","appcenterOrg"\:"GVCSportsAndroidApps"}
+wrapper-bwin-pt={"apk"\:"wrapper-bwin-pt-beta-debug.apk","hockeyAppId"\:"Android-CCB-Sports-Bwin-PT-Beta","releaseId"\:"210831","isAppCenter"\:"true","appcenterOrg"\:null}
+cas-wrapper-bwin-pt={"apk"\:"cas-wrapper-bwin-pt-beta-debug.apk","hockeyAppId"\:"Android-CCB-Casino-Bwin-PT-Beta","releaseId"\:"210831","isAppCenter"\:"true","appcenterOrg"\:null}
+cas-wrapper-borgatacasino-nj={"apk"\:"cas-wrapper-borgatacasino-nj-beta-debug.apk","hockeyAppId"\:"Android-Unified-Borgata-US-App-Beta","releaseId"\:"210824","isAppCenter"\:"true","appcenterOrg"\:"GVCCasinoAndroidApps"}
