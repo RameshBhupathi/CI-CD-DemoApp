@@ -40,7 +40,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun launchHome() {
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this,InAppUpdateActivity::class.java))
         finish()
     }
 
