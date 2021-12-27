@@ -42,6 +42,12 @@ fun CalculatorView(result: MutableState<Int>) {
         Button(onClick = {
             result.value= Calculator.addition(3,4)
         },content = { Text(text = "Addition")})
+        Button(onClick = {
+            result.value= Calculator.multiplication(3,4)
+        },content = { Text(text = "Multi")})
+        Button(onClick = {
+            result.value= Calculator.subtraction(3,4)
+        },content = { Text(text = "Sub")})
     }
 }
 
