@@ -1,57 +1,61 @@
 package com.rams.jenkinsapp
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.tooling.preview.Preview
 import com.rams.jenkinsapp.ui.theme.JenkinsAppTheme
 
 class MainActivity : ComponentActivity() {
+    var result = mutableStateOf(0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JenkinsAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.onPrimary) {
-                    //Greeting()
+                    CalculatorView(result)
                 }
             }
         }
     }
-}/*
+}
 
 @Composable
-fun Greeting() {
-    Image(painterResource(id = R.drawable.banner_image_new),
+fun CalculatorView(result: MutableState<Int>) {
+   /* Image(painterResource(id = R.drawable.banner_image_new),
         contentDescription = "haaaa",
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-    )
-    GreetingText(this)
+    )*/
+    Row() {
+        Text(text = "Result "+result)
+        Button(onClick = {
+            result.value= Calculator.addition(3,4)
+        },content = { Text(text = "Addition")})
+    }
 }
 
-@Composable
+
+
+/*@Composable
 fun GreetingText(activity: Activity) {
     Button(onClick = {
         activity.startActivity(Intent(activity,InAppUpdateActivity::class.java))
     }){
         Text(text = "Wellcommme")
     }
-}
-*/
+}*/
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
