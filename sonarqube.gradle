@@ -11,6 +11,7 @@ sonarqube {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.sources", "src/main/java"
         property "sonar.issuesReport.html.enable", "true"
+        property "sonar.issuesReport.xml.enable", "true"
         property "sonar.issuesReport.console.enable", "true"
         property "sonar.exclusions", '**/*Test*/**,' +
                 'build/**' +
