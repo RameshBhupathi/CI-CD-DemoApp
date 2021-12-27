@@ -32,6 +32,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.snackbar.Snackbar;
 import com.inapp.update.InAppUpdateManager;
 import com.inapp.update.InAppUpdateStatus;
 
@@ -81,7 +82,7 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQ_CODE_VERSION_UPDATE) {
+      /*  if (requestCode == REQ_CODE_VERSION_UPDATE) {
             if (resultCode == Activity.RESULT_CANCELED) {
                 // If the update is cancelled by the user,
                 // you can request to start the update again.
@@ -91,6 +92,19 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
             }
         }
 
+        super.onActivityResult(requestCode, resultCode, data);*/
+        if (requestCode == REQ_CODE_VERSION_UPDATE) {
+            Log.e(TAG, "Update flow failed! Result code: " + resultCode);
+            View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
+            if (resultCode == Activity.RESULT_CANCELED) {
+                Snackbar.make(rootView,"Update canceled by user!",Snackbar.LENGTH_LONG);
+            } else if (resultCode ==Activity.RESULT_OK) {
+                Snackbar.make(rootView,"Update success!",Snackbar.LENGTH_LONG);
+            } else {
+                Snackbar.make(rootView,"Update Failed!",Snackbar.LENGTH_LONG);
+                inAppUpdateManager.checkForAppUpdate();
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
