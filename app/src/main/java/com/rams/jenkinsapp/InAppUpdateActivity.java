@@ -71,7 +71,10 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
             } else {
                 inAppUpdateManager
                         .mode(UpdateMode.FLEXIBLE)
-                        .useCustomNotification(true);
+                        .useCustomNotification(true)
+                        .snackBarMessage("An update has just been downloaded.")
+                        .snackBarAction("RESTART")
+                        .handler(this);
             }
         });
         updateButton.setOnClickListener(view ->
