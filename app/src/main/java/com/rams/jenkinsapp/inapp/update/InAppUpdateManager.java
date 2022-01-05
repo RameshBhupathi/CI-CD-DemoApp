@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.inapp.update;
+package com.rams.jenkinsapp.inapp.update;
 
 import android.content.IntentSender;
 import android.util.Log;
@@ -37,7 +37,7 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
 
-import static com.inapp.update.Constants.UpdateMode;
+import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
 
 /**
  * A simple implementation of the Android In-App Update API.

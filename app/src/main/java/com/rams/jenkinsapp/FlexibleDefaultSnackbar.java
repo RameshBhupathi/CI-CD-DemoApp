@@ -16,21 +16,37 @@
 
 package com.rams.jenkinsapp;
 
-import static com.inapp.update.Constants.UpdateMode;
+import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
+
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.inapp.update.InAppUpdateManager;
-import com.inapp.update.InAppUpdateStatus;
+import com.rams.jenkinsapp.inapp.update.InAppUpdateManager;
+import com.rams.jenkinsapp.inapp.update.InAppUpdateStatus;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import kotlin.annotation.AnnotationTarget;
+
 
 public class FlexibleDefaultSnackbar extends AppCompatActivity implements InAppUpdateManager.InAppUpdateHandler {
     private static final int REQ_CODE_VERSION_UPDATE = 530;
     private static final String TAG = "Sample";
+
+    @Retention(SOURCE)
+    @IntDef({NAVIGATION_MODE_STANDARD, NAVIGATION_MODE_LIST, NAVIGATION_MODE_TABS})
+    public @interface NavigationMode {}
+    public static final int NAVIGATION_MODE_STANDARD = 0;
+    public static final int NAVIGATION_MODE_LIST = 1;
+    public static final int NAVIGATION_MODE_TABS = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

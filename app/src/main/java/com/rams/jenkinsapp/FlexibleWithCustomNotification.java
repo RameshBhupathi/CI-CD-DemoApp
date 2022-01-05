@@ -24,9 +24,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.inapp.update.Constants;
-import com.inapp.update.InAppUpdateManager;
-import com.inapp.update.InAppUpdateStatus;
+import com.rams.jenkinsapp.inapp.update.Constants;
+import com.rams.jenkinsapp.inapp.update.InAppUpdateManager;
+import com.rams.jenkinsapp.inapp.update.InAppUpdateStatus;
 
 
 public class FlexibleWithCustomNotification extends AppCompatActivity implements InAppUpdateManager.InAppUpdateHandler {

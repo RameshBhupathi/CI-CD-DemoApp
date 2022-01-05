@@ -47,6 +47,15 @@ android {
         jvmTarget = '1.8'
         useIR = true
     }
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
+        unitTests {
+            includeAndroidResources = true
+
+        }
+    }
+
     buildFeatures {
         compose true
         viewBinding true

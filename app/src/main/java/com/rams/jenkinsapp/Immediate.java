@@ -16,7 +16,7 @@
 
 package com.rams.jenkinsapp;
 
-import static com.inapp.update.Constants.UpdateMode;
+import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +26,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.inapp.update.InAppUpdateManager;
+import com.rams.jenkinsapp.inapp.update.InAppUpdateManager;
 
 public class Immediate extends AppCompatActivity {
     private static final int REQ_CODE_VERSION_UPDATE = 530;

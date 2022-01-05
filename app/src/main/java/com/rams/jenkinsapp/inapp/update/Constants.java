@@ -1,4 +1,4 @@
-package com.inapp.update;
+package com.rams.jenkinsapp.inapp.update;
 
 public class Constants {
 

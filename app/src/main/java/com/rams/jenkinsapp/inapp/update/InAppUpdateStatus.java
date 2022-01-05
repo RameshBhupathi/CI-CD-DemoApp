@@ -1,4 +1,4 @@
-package com.inapp.update;
+package com.rams.jenkinsapp.inapp.update;
 
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.install.InstallState;
