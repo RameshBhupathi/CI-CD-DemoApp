@@ -37,6 +37,8 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
 
+import static com.rams.jenkinsapp.inapp.update.Constants.FLEXIBLE_UPDATE;
+import static com.rams.jenkinsapp.inapp.update.Constants.IMMEDIATE_UPDATE;
 import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
 
 /**
@@ -319,7 +321,7 @@ public class InAppUpdateManager implements LifecycleObserver {
                     // The current activity making the update request.
                     activity,
                     // Include a request code to later monitor this update request.
-                    requestCode);
+                    IMMEDIATE_UPDATE);
         } catch (IntentSender.SendIntentException e) {
             Log.e(LOG_TAG, "error in startAppUpdateImmediate", e);
             reportUpdateError(Constants.UPDATE_ERROR_START_APP_UPDATE_IMMEDIATE, e);
@@ -334,7 +336,7 @@ public class InAppUpdateManager implements LifecycleObserver {
                     // The current activity making the update request.
                     activity,
                     // Include a request code to later monitor this update request.
-                    requestCode);
+                    FLEXIBLE_UPDATE);
         } catch (IntentSender.SendIntentException e) {
             Log.e(LOG_TAG, "error in startAppUpdateFlexible", e);
             reportUpdateError(Constants.UPDATE_ERROR_START_APP_UPDATE_FLEXIBLE, e);

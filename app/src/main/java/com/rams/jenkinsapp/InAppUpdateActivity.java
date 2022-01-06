@@ -16,6 +16,8 @@
 
 package com.rams.jenkinsapp;
 
+import static com.rams.jenkinsapp.inapp.update.Constants.FLEXIBLE_UPDATE;
+import static com.rams.jenkinsapp.inapp.update.Constants.IMMEDIATE_UPDATE;
 import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
 
 import android.annotation.SuppressLint;
@@ -33,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.install.model.AppUpdateType;
 import com.rams.jenkinsapp.inapp.update.InAppUpdateManager;
 import com.rams.jenkinsapp.inapp.update.InAppUpdateStatus;
 
@@ -61,7 +64,7 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        inAppUpdateManager = InAppUpdateManager.Builder(this, REQ_CODE_VERSION_UPDATE)
+        inAppUpdateManager = InAppUpdateManager.Builder(this)
                 .resumeUpdates(true)
                 .handler(this);
 
@@ -84,12 +87,12 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQ_CODE_VERSION_UPDATE) {
+        if (requestCode == FLEXIBLE_UPDATE || requestCode == IMMEDIATE_UPDATE) {
             Log.e(TAG, "Update flow failed! Result code: " + resultCode);
             View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
             if (resultCode == Activity.RESULT_CANCELED) {
                 Snackbar.make(rootView, "Update canceled by user!", Snackbar.LENGTH_LONG);
-                if(UpdateMode.IMMEDIATE == UpdateMode.IMMEDIATE){
+                if (requestCode == IMMEDIATE_UPDATE) {
                     inAppUpdateManager.checkForAppUpdate();
                 }
             } else if (resultCode == Activity.RESULT_OK) {
@@ -99,6 +102,7 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
                 inAppUpdateManager.checkForAppUpdate();
             }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
