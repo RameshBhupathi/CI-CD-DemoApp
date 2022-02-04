@@ -3,8 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'org.sonarqube'
 }
-apply from: '../jacoco.gradle'
-apply from: '../sonarqube.gradle'
+//apply from: '../jacoco.gradle'
+//apply from: '../sonarqube.gradle'
 android {
     compileSdk 31
 
