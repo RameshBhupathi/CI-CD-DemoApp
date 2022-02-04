@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package com.rams.jenkinsapp.inapp.update;
 
@@ -41,6 +42,7 @@ import static com.rams.jenkinsapp.inapp.update.Constants.FLEXIBLE_UPDATE;
 import static com.rams.jenkinsapp.inapp.update.Constants.IMMEDIATE_UPDATE;
 import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
 
+*/
 /**
  * A simple implementation of the Android In-App Update API.
  * <p>
@@ -50,28 +52,35 @@ import static com.rams.jenkinsapp.inapp.update.Constants.UpdateMode;
  * <a href="https://developer.android.com/guide/app-bundle/in-app-updates">documentation</a>
  * </p>
  * </div>
- */
+ *//*
+
 public class InAppUpdateManager implements LifecycleObserver {
 
-    /**
+    */
+/**
      * Callback methods where update events are reported.
-     */
+     *//*
+
     public interface InAppUpdateHandler {
-        /**
+        */
+/**
          * On update error.
          *
          * @param code  the code
          * @param error the error
-         */
+         *//*
+
         void onInAppUpdateError(int code, Throwable error);
 
 
-        /**
+        */
+/**
          * Monitoring the update state of the flexible downloads.
          * For immediate updates, Google Play takes care of downloading and installing the update for you.
          *
          * @param status the status
-         */
+         *//*
+
         void onInAppUpdateStatus(InAppUpdateStatus status);
     }
 
@@ -110,12 +119,14 @@ public class InAppUpdateManager implements LifecycleObserver {
     //region Constructor
     private static InAppUpdateManager instance;
 
-    /**
+    */
+/**
      * Creates a builder that uses the default requestCode.
      *
      * @param activity the activity
      * @return a new {@link InAppUpdateManager} instance
-     */
+     *//*
+
     public static InAppUpdateManager Builder(AppCompatActivity activity) {
         if (instance == null) {
             instance = new InAppUpdateManager(activity);
@@ -123,13 +134,15 @@ public class InAppUpdateManager implements LifecycleObserver {
         return instance;
     }
 
-    /**
+    */
+/**
      * Creates a builder
      *
      * @param activity    the activity
      * @param requestCode the request code to later monitor this update request via onActivityResult()
      * @return a new {@link InAppUpdateManager} instance
-     */
+     *//*
+
     public static InAppUpdateManager Builder(AppCompatActivity activity, int requestCode) {
         if (instance == null) {
             instance = new InAppUpdateManager(activity, requestCode);
@@ -167,42 +180,49 @@ public class InAppUpdateManager implements LifecycleObserver {
 
     // region Setters
 
-    /**
+    */
+/**
      * Set the update mode.
      *
      * @param mode the update mode
      * @return the update manager instance
-     */
+     *//*
+
     public InAppUpdateManager mode(UpdateMode mode) {
         this.mode = mode;
         return this;
     }
 
-    /**
+    */
+/**
      * Checks that the update is not stalled during 'onResume()'.
      * If the update is downloaded but not installed, will notify
      * the user to complete the update.
      *
      * @param resumeUpdates the resume updates
      * @return the update manager instance
-     */
+     *//*
+
     public InAppUpdateManager resumeUpdates(boolean resumeUpdates) {
         this.resumeUpdates = resumeUpdates;
         return this;
     }
 
-    /**
+    */
+/**
      * Set the callback handler
      *
      * @param handler the handler
      * @return the update manager instance
-     */
+     *//*
+
     public InAppUpdateManager handler(InAppUpdateHandler handler) {
         this.handler = handler;
         return this;
     }
 
-    /**
+    */
+/**
      * Use custom notification for the user confirmation needed by the {@link UpdateMode#FLEXIBLE} flow.
      * If this will set to true, need to implement the {@link InAppUpdateHandler} and listen for the {@link InAppUpdateStatus#isDownloaded()} status
      * via {@link InAppUpdateHandler#onInAppUpdateStatus} callback. Then a notification (or some other UI indication) can be used,
@@ -211,7 +231,8 @@ public class InAppUpdateManager implements LifecycleObserver {
      *
      * @param useCustomNotification use custom user confirmation
      * @return the update manager instance
-     */
+     *//*
+
     public InAppUpdateManager useCustomNotification(boolean useCustomNotification) {
         this.useCustomNotification = useCustomNotification;
         return this;
@@ -253,17 +274,21 @@ public class InAppUpdateManager implements LifecycleObserver {
 
     //region Methods
 
-    /**
+    */
+/**
      * Check for update availability. If there will be an update available
      * will start the update process with the selected {@link UpdateMode}.
-     */
+     *//*
+
     public void checkForAppUpdate() {
         checkForUpdate(true);
     }
 
-    /**
+    */
+/**
      * Triggers the completion of the app update for the flexible flow.
-     */
+     *//*
+
     public void completeUpdate() {
         appUpdateManager.completeUpdate();
     }
@@ -271,10 +296,12 @@ public class InAppUpdateManager implements LifecycleObserver {
 
     //region Private Methods
 
-    /**
+    */
+/**
      * Check for update availability. If there will be an update available
      * will start the update process with the selected {@link UpdateMode}.
-     */
+     *//*
+
     private void checkForUpdate(final boolean startUpdate) {
         Log.e(LOG_TAG,"checkForUpdate :"+startUpdate);
         // Returns an intent object that you use to check for an update.
@@ -343,10 +370,12 @@ public class InAppUpdateManager implements LifecycleObserver {
         }
     }
 
-    /**
+    */
+/**
      * Displays the snackbar notification and call to action.
      * Needed only for Flexible app update
-     */
+     *//*
+
     private void popupSnackbarForUserConfirmation() {
         if (!useCustomNotification) {
             if (snackbar != null && snackbar.isShownOrQueued())
@@ -355,10 +384,12 @@ public class InAppUpdateManager implements LifecycleObserver {
         }
     }
 
-    /**
+    */
+/**
      * Checks that the update is not stalled during 'onResume()'.
      * However, you should execute this check at all app entry points.
-     */
+     *//*
+
     private void checkNewAppVersionState() {
 
         appUpdateManager
@@ -426,3 +457,4 @@ public class InAppUpdateManager implements LifecycleObserver {
 
     //endregion
 }
+*/

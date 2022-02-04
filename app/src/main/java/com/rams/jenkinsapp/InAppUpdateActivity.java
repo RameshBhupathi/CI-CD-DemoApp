@@ -35,7 +35,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.play.core.install.model.AppUpdateType;
 import com.rams.jenkinsapp.inapp.update.InAppUpdateManager;
 import com.rams.jenkinsapp.inapp.update.InAppUpdateStatus;
 
@@ -87,19 +86,33 @@ public class InAppUpdateActivity extends AppCompatActivity implements InAppUpdat
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == FLEXIBLE_UPDATE || requestCode == IMMEDIATE_UPDATE) {
-            Log.e(TAG, "Update flow failed! Result code: " + resultCode);
-            View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
+        View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
+        if (requestCode == IMMEDIATE_UPDATE) {
             if (resultCode == Activity.RESULT_CANCELED) {
-                Snackbar.make(rootView, "Update canceled by user!", Snackbar.LENGTH_LONG);
-                if (requestCode == IMMEDIATE_UPDATE) {
-                    inAppUpdateManager.checkForAppUpdate();
-                }
-            } else if (resultCode == Activity.RESULT_OK) {
-                Snackbar.make(rootView, "Update success!", Snackbar.LENGTH_LONG);
-            } else {
-                Snackbar.make(rootView, "Update Failed!", Snackbar.LENGTH_LONG);
+                Log.e(TAG, "force update cancel requestC:" + requestCode);
                 inAppUpdateManager.checkForAppUpdate();
+            } else if (resultCode == Activity.RESULT_OK) {
+                Log.e(TAG, "Force Update else" + requestCode);
+                Snackbar.make(rootView, "FU Update success!", Snackbar.LENGTH_LONG).show();
+                super.onActivityResult(requestCode, resultCode, data);
+            } else {
+                Log.e(TAG, "Force Update else" + requestCode);
+                Snackbar.make(rootView, "FU Update Failed!", Snackbar.LENGTH_LONG).show();
+                inAppUpdateManager.checkForAppUpdate();
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        } else if (requestCode == FLEXIBLE_UPDATE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                Log.e(TAG, "request code softupgrade cancel" + requestCode);
+            } else if (resultCode == Activity.RESULT_OK) {
+                Log.e(TAG, "request code softupgrade" + requestCode);
+                Snackbar.make(rootView, "SU Update success!", Snackbar.LENGTH_LONG).show();
+                super.onActivityResult(requestCode, resultCode, data);
+            } else {
+                Log.e(TAG, "request code softupgrade" + requestCode);
+                Snackbar.make(rootView, "SU Update Failed!", Snackbar.LENGTH_LONG).show();
+                inAppUpdateManager.checkForAppUpdate();
+                super.onActivityResult(requestCode, resultCode, data);
             }
         }
 
