@@ -1,0 +1,246 @@
+pipeline {
+agent any
+ environment {
+     appCenterAppId = ""
+     appcenterOrg =""
+     buildVarinat = "{$buildVariant}"
+     uploadToAppCenter  ="${Upload_To_Appcenter}"
+   }
+stages {
+
+stage('Checkout') {
+steps {
+    println " Brnahc Name ${FROM_BRANCH}"
+// Get some code from a GitHub repository
+git branch: "main", url: 'https://github.com/RameshBhupathi/CI-CD-DemoApp'
+
+}
+}
+
+/*stage('Build') {
+steps {
+    script {
+      bat(script: "./gradlew clean :app:bundle${buildVariant}",
+          returnStdout: true)
+    }
+  }
+}
+*/
+stage('TestCases'){
+
+    steps{
+        script{
+          /*  bat(script: "./gradlew test",
+          returnStdout: true)*/
+          println "Test Cases"
+        }
+    }
+}
+/*stage('Sonar Reports'){
+
+    steps{
+        script{
+            bat(script: "./gradlew sonarqube -Dsonar.host.url=http://localhost:9000/ -Dsonar.login=c5a3ef3151853160f8140b86896b73f6522e0422",
+          returnStdout: true)
+        }
+    }
+}*/
+
+/*stage('Test') {
+steps {
+    script{
+echo "Testing ${distributionGroups} "
+        addDeployToDashboard(env: 'prodd', buildNumber:'1.1.111')
+
+        def builtVersion = "v2.7.5"
+        // Build app with ${builtVersion} version
+
+        //Add buttons to the left sidebar
+        buildAddUrl(title: 'Deploy to DEV', url: "/job/Android_Pipeline/parambuild/?env=dev&version=${builtVersion}")
+        buildAddUrl(title: 'Deploy to PROD', url: "/job/Android_Pipeline/parambuild/?env=prod&version=${builtVersion}")
+
+}
+}
+}*/
+
+
+/*if("${Upload_To_Appcenter}"){
+stage('Release') {
+steps {
+    script{
+        println "work space ${WORKSPACE}"
+ File file = new File("${WORKSPACE}\\hockeyapp-mapping.txt")
+   def data = extractLines(file)
+
+       for(project in data){
+
+          appCenterAppId = project["hockeyAppId"]
+                String apkName = project["apk"]
+                String releaseId = project["releaseId"]
+                 appcenterOrg = project["appcenterOrg"]
+                String isAppCenter = project["isAppCenter"]
+                println "App ID = $appCenterAppId" + "apkName = $apkName" + "releaseID = $releaseId" + "appcenterOrg = $appcenterOrg" + "isAppCenter = $isAppCenter"
+       }
+
+   echo "Doneee"
+}
+}
+}
+}*/
+
+
+/*stage('Publish') {
+  steps {
+      script {
+      def apkFolderPath =""
+      if(buildVariant.equals("debug")){
+          apkFolderPath = "debug"
+      }
+      else{
+          apkFolderPath = "release"
+      }
+      echo "path =$apkFolderPath"
+
+      archiveArtifacts artifacts: "app\\build\\outputs\\bundle\\$apkFolderPath\\**.aab", followSymlinks: false
+
+
+           println "start upload to playstore"
+        //   androidApkUpload filesPattern: "app\\build\\outputs\\bundle\\$apkFolderPath\\**.aab",googleCredentialsId: 'rams_dev_account', releaseName: 'Next Release', rolloutPercentage: '100', trackName: 'internal'
+        //androidApkUpload , googleCredentialsId: '', releaseName: 'Testing releasee', rolloutPercentage: '100', trackName: "${Release_Track}"
+
+
+
+   appCenter apiToken: 'b3a5f49ad4510ee0d6c0a4c681fe31d02ae277d4',
+            ownerName: 'bhupatiramesh-3mfx',
+            appName: 'Android_FreeStyle',
+            pathToApp: "app\\build\\outputs\\bundle\\$apkFolderPath\\**.aab",
+            distributionGroups: '${distributionGroups}',
+            releaseNotes:'${releaseNotes}'
+      }
+  }
+}*/
+
+/*stage('PushToPlayStore'){
+    steps {
+        script{
+            println "playstore load "+pushToPlayStore.equals('true')
+             println "playstore load "+pushToPlayStore.equals('false')
+            if(pushToPlayStore.equals('true')){
+        apkFolderPath = getApkFolderPath("${Build_Variant}")
+        println "start upload to playstore"
+        androidApkUpload filesPattern: "labels\\${Label_Name}\\build\\outputs\\apk\\$apkFolderPath\\**.apk", googleCredentialsId: 'electraworks_account', releaseName: 'Testing releasee', rolloutPercentage: '100', trackName: "${Release_Track}"
+            }
+    }
+    }
+}
+*/
+stage("last-changes") {
+    steps{
+        script{
+           echo "Gathering SCM changes"
+    String changeString =""
+       int  MAX_MSG_LEN = 100
+
+    def changeLogSets = currentBuild.changeSets
+     for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+        for (int j = 0; j < entries.length; j++) {
+            def entry = entries[j]
+            truncated_msg = entry.msg.take(MAX_MSG_LEN)
+            changeString += " - ${truncated_msg} [${entry.author}]\n"
+        }
+    }
+
+    if (!changeString) {
+        changeString = " - No new changes"
+    }
+    println "changeLogSets "+changeString
+
+    println "final string  "+ getChangeString()
+       /* def publisher = LastChanges.getLastChangesPublisher "PREVIOUS_REVISION", "SIDE", "LINE", true, true, "", "", "", "", ""
+              publisher.publishLastChanges()
+              def changes = publisher.getLastChanges()
+              println(changes.getEscapedDiff())
+              for (commit in changes.getCommits()) {
+                  println(commit)
+                  def commitInfo = commit.getCommitInfo()
+                  println(commitInfo)
+                  println(commitInfo.getCommitMessage())
+                  println(commit.getChanges())
+              }*/
+      }
+    }
+}
+}
+
+
+/*post {
+    always {
+        emailext body: 'Jenkins Emialll', subject: 'Testing email', to: 'bramesh@ivycomptech.com'
+          //  echo 'I will always say Hello again!'
+        }
+         success {
+                        //emailext body: 'Jenkins Emialll', subject: 'Testing email', to: 'ramakrishna.gollaprolu@ivycomptech.com'
+
+            echo 'I will always say Hello again!success'
+        }
+         failure {
+                        //emailext body: 'Jenkins Emialll', subject: 'Testing email', to: 'ramakrishna.gollaprolu@ivycomptech.com'
+
+            echo 'I will always say Hello again! failure'
+        }
+}*/
+}
+
+@NonCPS
+def extractLines(final File content) {
+
+  if (!content.exists()) {
+        println "mapping doesn't exist"
+        return []
+    }
+    Properties props = new Properties()
+    props.load(content.newDataInputStream())
+    def listOfProjects = []
+
+    for (Map.Entry<Object, Object> e : props.entrySet()) {
+        println("#&#&#&" + props)
+        String projectName = e.getKey() as String
+        println("&&&&&####" + projectName)
+        if (!projectName.isEmpty()) {
+            String value = e.getValue()
+            println("@#&@#&" + value)
+            if (!value.isEmpty()) {
+                def projectObj = new groovy.json.JsonSlurper().parseText(value)
+                println("@#!@#" + projectObj)
+
+                 listOfProjects.add(projectObj)
+            }
+        }
+    }
+
+return listOfProjects
+}
+@NonCPS
+def getChangeString() {
+ MAX_MSG_LEN = 100
+ def changeString = ""
+
+ echo "Gathering SCM changes"
+ def changeLogSets = currentBuild.changeSets
+ for (int i = 0; i < changeLogSets.size(); i++) {
+ def entries = changeLogSets[i].items
+ println "entriess "+entries
+ for (int j = 0; j < entries.length; j++) {
+ def entry = entries[j]
+ println "entry "+entry
+ truncated_msg = entry.msg.take(MAX_MSG_LEN)
+ changeString += " - ${truncated_msg} [${entry.author}]\n"
+ }
+ }
+
+ if (!changeString) {
+ changeString = " - No new changes"
+ }
+ return changeString
+}
