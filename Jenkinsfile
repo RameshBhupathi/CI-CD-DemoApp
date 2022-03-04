@@ -17,7 +17,7 @@ git branch: "main", url: 'https://github.com/RameshBhupathi/CI-CD-DemoApp'
 }
 }
 
-/*stage('Build') {
+stage('Build') {
 steps {
     script {
       bat(script: "./gradlew clean :app:bundle${buildVariant}",
@@ -25,7 +25,6 @@ steps {
     }
   }
 }
-*/
 stage('TestCases'){
 
     steps{
@@ -89,7 +88,7 @@ steps {
 }*/
 
 
-/*stage('Publish') {
+stage('Publish') {
   steps {
       script {
       def apkFolderPath =""
@@ -118,7 +117,7 @@ steps {
             releaseNotes:'${releaseNotes}'
       }
   }
-}*/
+}
 
 /*stage('PushToPlayStore'){
     steps {
