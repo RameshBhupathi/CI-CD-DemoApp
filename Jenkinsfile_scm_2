@@ -195,7 +195,7 @@ stage("last-changes") {
 def extractLines(final File content) {
 
   if (!content.exists()) {
-        println "mapping doesn't exist"
+        println "mapping doesn't exist scm2"
         return []
     }
     Properties props = new Properties()
