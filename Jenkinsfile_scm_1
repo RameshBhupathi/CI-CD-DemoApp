@@ -137,7 +137,7 @@ steps {
 stage("last-changes") {
     steps{
         script{
-           echo "Gathering SCM changes_scm_1""
+           echo "Gathering SCM changes_scm_1"
     String changeString =""
        int  MAX_MSG_LEN = 100
 
