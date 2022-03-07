@@ -10,9 +10,9 @@ stages {
 
 stage('Checkout') {
 steps {
-    println " Brnahc Name ${FROM_BRANCH}"
+    println " Branch Name ${FROM_BRANCH}"
 // Get some code from a GitHub repository
-git branch: "main", url: 'https://github.com/RameshBhupathi/CI-CD-DemoApp'
+//git branch: "main", url: 'https://github.com/RameshBhupathi/CI-CD-DemoApp'
 
 }
 }
@@ -20,7 +20,9 @@ git branch: "main", url: 'https://github.com/RameshBhupathi/CI-CD-DemoApp'
 stage('Build') {
 steps {
     script {
-      bat(script: "./gradlew clean :app:bundle${buildVariant}",returnStdout: true)
+     // bat(script: "./gradlew clean :app:bundle${buildVariant}",returnStdout: true)
+         println "Build Stage_scm_1"
+
     }
   }
 }
@@ -30,7 +32,7 @@ stage('TestCases'){
         script{
           /*  bat(script: "./gradlew test",
           returnStdout: true)*/
-          println "Test Cases"
+          println "Test Cases scm_1""
         }
     }
 }
@@ -87,7 +89,7 @@ steps {
 }*/
 
 
-stage('Publish') {
+/*stage('Publish') {
   steps {
       script {
       def apkFolderPath =""
@@ -116,7 +118,7 @@ stage('Publish') {
             releaseNotes:'${releaseNotes}'
       }
   }
-}
+}*/
 
 /*stage('PushToPlayStore'){
     steps {
@@ -135,7 +137,7 @@ stage('Publish') {
 stage("last-changes") {
     steps{
         script{
-           echo "Gathering SCM changes"
+           echo "Gathering SCM changes_scm_1""
     String changeString =""
        int  MAX_MSG_LEN = 100
 
