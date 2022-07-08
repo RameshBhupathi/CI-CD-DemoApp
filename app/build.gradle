@@ -9,11 +9,11 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.rams.jenkinsapp"
+        applicationId "com.test.jenkinsapp"
         minSdk 21
         targetSdk 31
-        versionCode 13
-        versionName "3.3"
+        versionCode 1
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -23,9 +23,9 @@ android {
     }
     signingConfigs {
          release {
-             storeFile  file("keystore.jks")
+             storeFile  file("keystore_flavour.jks")
              storePassword  'password'
-             keyAlias 'cicd'
+             keyAlias 'jenkins'
              keyPassword 'password'
          }
     }
