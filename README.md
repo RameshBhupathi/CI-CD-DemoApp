@@ -4,6 +4,6 @@ Done with declartive approach up to upload the build to appcenter.
 
 Clone --> Build --> Archive --> UploadToAppcenter
 
-Done hange Declaration pipeline to Scm where we have entire script .jenkins file
+Change Declaration pipeline to Scm where we have entire script .jenkins file
 
 Clone --> Build --> Archive --> UploadToAppcenter
